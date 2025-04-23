@@ -25,7 +25,7 @@ import {
 import { ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/vue/20/solid";
 
 const navigation = [
-    { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
+    { name: "Products", href: "/products", icon: HomeIcon, current: true },
     { name: "Team", href: "#", icon: UsersIcon, current: false },
     { name: "Projects", href: "#", icon: FolderIcon, current: false },
     { name: "Calendar", href: "#", icon: CalendarIcon, current: false },
@@ -430,7 +430,7 @@ const sidebarOpen = ref(false);
 
             <main class="py-10">
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <!-- Your content -->
+                    <slot />
                 </div>
             </main>
         </div>

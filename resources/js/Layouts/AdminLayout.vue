@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import { usePage } from "@inertiajs/vue3";
+import { usePage, Link } from "@inertiajs/vue3";
 import {
     Dialog,
     DialogPanel,
@@ -205,8 +205,8 @@ const sidebarOpen = ref(false);
                                             </ul>
                                         </li>
                                         <li class="mt-auto">
-                                            <a
-                                                href="#"
+                                            <Link
+                                                :href="route('profile.show')"
                                                 class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
                                             >
                                                 <Cog6ToothIcon
@@ -214,7 +214,7 @@ const sidebarOpen = ref(false);
                                                     aria-hidden="true"
                                                 />
                                                 Settings
-                                            </a>
+                                            </Link>
                                         </li>
                                     </ul>
                                 </nav>
@@ -292,8 +292,8 @@ const sidebarOpen = ref(false);
                             </ul>
                         </li>
                         <li class="mt-auto">
-                            <a
-                                href="#"
+                            <Link
+                                :href="route('profile.show')"
                                 class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
                             >
                                 <Cog6ToothIcon
@@ -301,7 +301,7 @@ const sidebarOpen = ref(false);
                                     aria-hidden="true"
                                 />
                                 Settings
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </nav>

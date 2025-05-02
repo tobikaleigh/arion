@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+import { usePage } from "@inertiajs/vue3";
 import {
     Dialog,
     DialogPanel,
@@ -23,6 +24,8 @@ import {
     XMarkIcon,
 } from "@heroicons/vue/24/outline";
 import { ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/vue/20/solid";
+
+const user = usePage().props.auth.user;
 
 const navigation = [
     { name: "Products", href: "/products", icon: HomeIcon, current: true },
@@ -375,7 +378,7 @@ const sidebarOpen = ref(false);
                                         <span
                                             class="ml-4 text-sm/6 font-semibold text-gray-900"
                                             aria-hidden="true"
-                                            >Tom Cook</span
+                                            >{{ user.name }}</span
                                         >
                                         <ChevronDownIcon
                                             class="ml-2 size-5 text-gray-400"

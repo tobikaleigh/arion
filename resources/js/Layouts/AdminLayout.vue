@@ -26,21 +26,29 @@ import { ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/vue/20/solid";
 
 const navigation = [
     { name: "Products", href: "/products", icon: HomeIcon, current: true },
-    { name: "Team", href: "#", icon: UsersIcon, current: false },
-    { name: "Projects", href: "#", icon: FolderIcon, current: false },
-    { name: "Calendar", href: "#", icon: CalendarIcon, current: false },
     {
         name: "Documents",
         href: "#",
         icon: DocumentDuplicateIcon,
         current: false,
     },
-    { name: "Reports", href: "#", icon: ChartPieIcon, current: false },
 ];
 const teams = [
     { id: 1, name: "Heroicons", href: "#", initial: "H", current: false },
     { id: 2, name: "Tailwind Labs", href: "#", initial: "T", current: false },
     { id: 3, name: "Workcation", href: "#", initial: "W", current: false },
+];
+const quickLinks = [
+    {
+        name: "Arion Webshop",
+        href: "https://shop.arionracing.dk/shop/",
+        initial: "WS",
+    },
+    {
+        name: "Arion Homepage",
+        href: "https://arionracing.dk/",
+        initial: "HP",
+    },
 ];
 const userNavigation = [
     { name: "Your profile", href: "#" },
@@ -162,40 +170,31 @@ const sidebarOpen = ref(false);
                                             <div
                                                 class="text-xs/6 font-semibold text-gray-400"
                                             >
-                                                Your teams
+                                                Your quick links
                                             </div>
                                             <ul
                                                 role="list"
                                                 class="-mx-2 mt-2 space-y-1"
                                             >
                                                 <li
-                                                    v-for="team in teams"
-                                                    :key="team.name"
+                                                    v-for="link in quickLinks"
+                                                    :key="link.name"
                                                 >
                                                     <a
-                                                        :href="team.href"
-                                                        :class="[
-                                                            team.current
-                                                                ? 'bg-gray-50 text-indigo-600'
-                                                                : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600',
-                                                            'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
-                                                        ]"
+                                                        :href="link.href"
+                                                        class="text-gray-700 hover:bg-gray-50 hover:text-indigo-600 group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold"
+                                                        target="_blank"
                                                     >
                                                         <span
-                                                            :class="[
-                                                                team.current
-                                                                    ? 'border-indigo-600 text-indigo-600'
-                                                                    : 'border-gray-200 text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600',
-                                                                'flex size-6 shrink-0 items-center justify-center rounded-lg border bg-white text-[0.625rem] font-medium',
-                                                            ]"
+                                                            class="border-gray-200 text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600 flex size-6 shrink-0 items-center justify-center rounded-lg border bg-white text-[0.625rem] font-medium"
                                                             >{{
-                                                                team.initial
+                                                                link.initial
                                                             }}</span
                                                         >
                                                         <span
                                                             class="truncate"
                                                             >{{
-                                                                team.name
+                                                                link.name
                                                             }}</span
                                                         >
                                                     </a>
@@ -269,31 +268,22 @@ const sidebarOpen = ref(false);
                         </li>
                         <li>
                             <div class="text-xs/6 font-semibold text-gray-400">
-                                Your teams
+                                Your quick links
                             </div>
                             <ul role="list" class="-mx-2 mt-2 space-y-1">
-                                <li v-for="team in teams" :key="team.name">
+                                <li v-for="link in quickLinks" :key="link.name">
                                     <a
-                                        :href="team.href"
-                                        :class="[
-                                            team.current
-                                                ? 'bg-gray-50 text-indigo-600'
-                                                : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600',
-                                            'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
-                                        ]"
+                                        :href="link.href"
+                                        class="text-gray-700 hover:bg-gray-50 hover:text-indigo-600 group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold"
+                                        target="_blank"
                                     >
                                         <span
-                                            :class="[
-                                                team.current
-                                                    ? 'border-indigo-600 text-indigo-600'
-                                                    : 'border-gray-200 text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600',
-                                                'flex size-6 shrink-0 items-center justify-center rounded-lg border bg-white text-[0.625rem] font-medium',
-                                            ]"
-                                            >{{ team.initial }}</span
+                                            class="border-gray-200 text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600 flex size-6 shrink-0 items-center justify-center rounded-lg border bg-white text-[0.625rem] font-medium"
+                                            >{{ link.initial }}</span
                                         >
-                                        <span class="truncate">{{
-                                            team.name
-                                        }}</span>
+                                        <span class="truncate">
+                                            {{ link.name }}
+                                        </span>
                                     </a>
                                 </li>
                             </ul>

@@ -2,7 +2,4 @@
 
 namespace App\Models;
 
-class Product extends BaseModel
-{
-    //
-}
+class Product extends BaseModel {}

@@ -1,7 +1,12 @@
 <script setup>
+import { ref } from "vue";
+import CreateProductDialog from "@/Components/Admin/Product/CreateProductDialog.vue";
+
+const showCreateProductDialog = ref(false);
+
 const props = defineProps({
     products: {
-        type: Array,
+        type: Object,
         required: true,
     },
 });
@@ -11,7 +16,9 @@ const props = defineProps({
     <div>
         <div class="sm:flex sm:items-center">
             <div class="sm:flex-auto">
-                <h1 class="text-base font-semibold text-gray-900">
+                <h1
+                    class="text-base font-semibold text-gray-900 dark:text-white"
+                >
                     All products
                 </h1>
                 <p class="mt-2 text-sm text-gray-700">
@@ -21,11 +28,18 @@ const props = defineProps({
             </div>
             <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
                 <button
+                    @click="showCreateProductDialog = true"
                     type="button"
                     class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                     Add product
                 </button>
+
+                <CreateProductDialog
+                    :show="showCreateProductDialog"
+                    @close="showCreateProductDialog = false"
+                    @success="showCreateProductDialog = false"
+                />
             </div>
         </div>
         <div class="mt-8 flow-root">
@@ -83,7 +97,7 @@ const props = defineProps({
                                 <td
                                     class="px-3 py-4 text-sm whitespace-nowrap text-gray-500"
                                 >
-                                    {{ product.descriptioj }}
+                                    {{ product.description }}
                                 </td>
                                 <td
                                     class="px-3 py-4 text-sm whitespace-nowrap text-gray-500"

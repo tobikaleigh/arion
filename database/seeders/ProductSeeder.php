@@ -17,9 +17,6 @@ class ProductSeeder extends Seeder
     {
         Product::factory()
             ->count(10)
-            ->create([
-                'name' => 'Product Name',
-                'description' => 'Product Description',
-            ]);
+            ->create();
     }
 }

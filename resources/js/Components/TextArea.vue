@@ -2,7 +2,8 @@
 import { onMounted, ref } from "vue";
 
 defineProps({
-    modelValue: String,
+    modelValue: String | Number,
+    disabled: Boolean,
 });
 
 defineEmits(["update:modelValue"]);
@@ -10,9 +11,7 @@ defineEmits(["update:modelValue"]);
 const input = ref(null);
 
 onMounted(() => {
-    console.log("Input mounted");
     if (input.value.hasAttribute("autofocus")) {
-        console.log("Input has autofocus");
         input.value.focus();
     }
 });
@@ -21,9 +20,11 @@ defineExpose({ focus: () => input.value.focus() });
 </script>
 
 <template>
-    <input
+    <textarea
         ref="input"
-        class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
+        class="pl-4 border w-full border-gray-200 focus:border-express-600 focus:ring-express-600 rounded-xl"
+        :class="{ 'bg-gray-50': disabled }"
+        :disabled="disabled"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
     />

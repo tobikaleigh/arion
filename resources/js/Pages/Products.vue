@@ -4,7 +4,7 @@ import Welcome from "@/Components/Welcome.vue";
 import ProductSection from "@/Components/Admin/Product/ProductSection.vue";
 
 const props = defineProps({
-    products: Array,
+    products: Object,
 });
 </script>
 

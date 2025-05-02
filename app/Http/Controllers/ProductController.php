@@ -44,4 +44,14 @@ class ProductController extends Controller
             'message' => 'Product created successfully.',
         ]);
     }
+
+    public function destroy(Product $product): RedirectResponse
+    {
+        $product->delete();
+
+        return back()->with('alert', [
+            'type' => 'success',
+            'message' => 'Product deleted successfully.',
+        ]);
+    }
 }

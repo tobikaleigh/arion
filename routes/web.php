@@ -28,4 +28,5 @@ Route::middleware([
 
     Route::get('/products', [ProductController::class, 'index'])->name('admin.products.index');
     Route::post('/products', [ProductController::class, 'store'])->name('admin.products.store');
+    Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
 });

@@ -49,8 +49,10 @@ function handleShowDeleteProductDialog(product) {
         <tbody class="divide-y divide-gray-200">
             <transition-group
                 enter-active-class="transition-opacity duration-500"
+                enter-from-class="opacity-0"
+                enter-to-class="opacity-100"
                 leave-active-class="transition-all duration-500"
-                leave-to-class="opacity-0 translate-x-full"
+                leave-to-class="opacity-0 translate-x-4"
             >
                 <tr v-for="product in products" :key="product.id">
                     <td

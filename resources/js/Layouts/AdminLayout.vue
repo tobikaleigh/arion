@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
-import { usePage, Link } from "@inertiajs/vue3";
+import { Head, usePage, Link } from "@inertiajs/vue3";
+import Banner from "@/Components/Banner.vue";
 import {
     Dialog,
     DialogPanel,
@@ -24,6 +25,13 @@ import {
     XMarkIcon,
 } from "@heroicons/vue/24/outline";
 import { ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/vue/20/solid";
+
+const props = defineProps({
+    title: {
+        type: String,
+        default: "Admin",
+    },
+});
 
 const user = usePage().props.auth.user;
 
@@ -65,6 +73,10 @@ const sidebarOpen = ref(false);
 
 <template>
     <div>
+        <Head :title="title" />
+
+        <Banner />
+
         <TransitionRoot as="template" :show="sidebarOpen">
             <Dialog
                 class="relative z-50 lg:hidden"

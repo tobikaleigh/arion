@@ -80,7 +80,7 @@ function handleShowDeleteProductDialog(product) {
                         class="px-3 py-4 text-sm whitespace-nowrap text-gray-500"
                     >
                         <span
-                            class="bg-gray-50 border p-1"
+                            class="bg-gray-50 border rounded p-1"
                             v-for="inventoryLocation in product
                                 .inventory_locations.data"
                             :key="inventoryLocation.id"

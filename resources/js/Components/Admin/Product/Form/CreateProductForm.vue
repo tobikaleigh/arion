@@ -107,7 +107,7 @@ watch(
                 <div>
                     <InputLabel
                         for="inventory_location_quantity"
-                        value="Quantity"
+                        value="Inventory Quantity"
                         class="mt-4"
                     />
                     <TextInput

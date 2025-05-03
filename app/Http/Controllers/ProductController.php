@@ -34,6 +34,7 @@ class ProductController extends Controller
         $input = $request->validated();
 
         $product                = Product::make();
+        $product->internal_id   = $input['internal_id'];
         $product->name          = $input['name'];
         $product->description   = $input['description'];
 

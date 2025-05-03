@@ -22,6 +22,7 @@ class StoreProductRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'internal_id'                   => 'required|string|max:255|unique:products,internal_id',
             'name'                          => 'required|string|max:255',
             'description'                   => 'nullable|string|max:65535',
             'inventory_location_name'       => 'required|string|max:255',

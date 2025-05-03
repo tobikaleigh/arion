@@ -28,10 +28,15 @@ import { ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/vue/20/solid";
 const user = usePage().props.auth.user;
 
 const navigation = [
-    { name: "Products", href: "/products", icon: HomeIcon, current: true },
+    {
+        name: "Products",
+        route: "admin.products.index",
+        icon: HomeIcon,
+        current: true,
+    },
     {
         name: "Documents",
-        href: "#",
+        route: "admin.products.index",
         icon: DocumentDuplicateIcon,
         current: false,
     },
@@ -53,10 +58,7 @@ const quickLinks = [
         initial: "HP",
     },
 ];
-const userNavigation = [
-    { name: "Your profile", href: "#" },
-    { name: "Sign out", href: "#" },
-];
+const userNavigation = [{ name: "Your profile", route: "profile.show" }];
 
 const sidebarOpen = ref(false);
 </script>
@@ -146,7 +148,9 @@ const sidebarOpen = ref(false);
                                                     :key="item.name"
                                                 >
                                                     <a
-                                                        :href="item.href"
+                                                        :href="
+                                                            route(item.route)
+                                                        "
                                                         :class="[
                                                             item.current
                                                                 ? 'bg-gray-50 text-indigo-600'
@@ -245,8 +249,8 @@ const sidebarOpen = ref(false);
                         <li>
                             <ul role="list" class="-mx-2 space-y-1">
                                 <li v-for="item in navigation" :key="item.name">
-                                    <a
-                                        :href="item.href"
+                                    <Link
+                                        :href="route(item.route)"
                                         :class="[
                                             item.current
                                                 ? 'bg-gray-50 text-indigo-600'
@@ -265,7 +269,7 @@ const sidebarOpen = ref(false);
                                             aria-hidden="true"
                                         />
                                         {{ item.name }}
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </li>
@@ -398,15 +402,15 @@ const sidebarOpen = ref(false);
                                             :key="item.name"
                                             v-slot="{ active }"
                                         >
-                                            <a
-                                                :href="item.href"
+                                            <Link
+                                                :href="route(item.route)"
                                                 :class="[
                                                     active
                                                         ? 'bg-gray-50 outline-hidden'
                                                         : '',
                                                     'block px-3 py-1 text-sm/6 text-gray-900',
                                                 ]"
-                                                >{{ item.name }}</a
+                                                >{{ item.name }}</Link
                                             >
                                         </MenuItem>
                                     </MenuItems>

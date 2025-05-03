@@ -9,7 +9,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <AdminLayout title="Dashboard">
+    <AdminLayout title="Products">
         <ProductSection :products="products.data" />
     </AdminLayout>
 </template>

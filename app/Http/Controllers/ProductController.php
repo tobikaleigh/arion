@@ -12,9 +12,11 @@ use Illuminate\Http\RedirectResponse;
 
 // Requests
 use App\Http\Requests\Product\StoreProductRequest;
-use App\Models\InventoryLocation;
+use App\Http\Requests\Product\UpdateProductRequest;
+
 // Models
 use App\Models\Product;
+use App\Models\InventoryLocation;
 
 class ProductController extends Controller
 {
@@ -26,8 +28,6 @@ class ProductController extends Controller
             'products' => new ProductCollection($products),
         ]);
     }
-
-    /*  public function show() {}; */
 
     public function store(StoreProductRequest $request): RedirectResponse
     {
@@ -53,6 +53,23 @@ class ProductController extends Controller
             'message' => 'Product created successfully.',
         ]);
     }
+
+    public function update(UpdateProductRequest $request, Product $product): RedirectResponse
+    {
+        $input = $request->validated();
+
+        $product->internal_id   = $input['internal_id'];
+        $product->name          = $input['name'];
+        $product->description   = $input['description'];
+
+        $product->save();
+
+        return back()->with('alert', [
+            'type' => 'success',
+            'message' => 'Product updated successfully.',
+        ]);
+    }
+
 
     public function destroy(Product $product): RedirectResponse
     {

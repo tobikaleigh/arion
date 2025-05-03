@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import Button from "@/Components/Button.vue";
+import UpdateProductDialog from "./UpdateProductDialog.vue";
 import DeleteProductDialogModal from "./DeleteProductDialogModal.vue";
 
 const props = defineProps({
@@ -10,8 +11,14 @@ const props = defineProps({
     },
 });
 
-const selectedProduct = ref(null);
+const showUpdateProductDialogModal = ref(false);
 const showDeleteProductDialogModal = ref(false);
+const selectedProduct = ref(null);
+
+function handleShowUpdateProductDialog(product) {
+    selectedProduct.value = product;
+    showUpdateProductDialogModal.value = true;
+}
 
 function handleShowDeleteProductDialog(product) {
     selectedProduct.value = product;
@@ -97,22 +104,21 @@ function handleShowDeleteProductDialog(product) {
                     <td
                         class="relative py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-0"
                     >
-                        <a
-                            href="#"
-                            class="text-indigo-600 hover:text-indigo-900"
-                            >Edit<span class="sr-only"
-                                >, {{ product.name }}</span
-                            ></a
+                        <Button
+                            size="sm"
+                            class="ml-2 text-indigo-600 hover:text-indigo-900 font-medium"
+                            type="button"
+                            variant="link"
+                            @click="handleShowUpdateProductDialog(product)"
                         >
+                            Edit
+                        </Button>
 
                         <Button
                             size="sm"
                             class="ml-2 text-indigo-600 hover:text-indigo-900 font-medium"
                             type="button"
                             variant="link"
-                            @click.prevent="
-                                handleShowDeleteProductDialog(product)
-                            "
                             @click="handleShowDeleteProductDialog(product)"
                         >
                             Delete
@@ -129,6 +135,20 @@ function handleShowDeleteProductDialog(product) {
         :product="selectedProduct"
         @close="
             showDeleteProductDialogModal = false;
+            selectedProduct = null;
+        "
+    />
+
+    <!-- Update Product Dialog Modal -->
+    <UpdateProductDialog
+        :show="showUpdateProductDialogModal"
+        :product="selectedProduct"
+        @close="
+            showUpdateProductDialogModal = false;
+            selectedProduct = null;
+        "
+        @success="
+            showUpdateProductDialogModal = false;
             selectedProduct = null;
         "
     />

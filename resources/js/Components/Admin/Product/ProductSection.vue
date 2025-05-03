@@ -23,8 +23,8 @@ const props = defineProps({
                     All products
                 </h1>
                 <p class="mt-2 text-sm text-gray-700">
-                    A list of all the products in your account including their
-                    name, title, and email address.
+                    A list of all the products in your store and their inventory
+                    location.
                 </p>
             </div>
             <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">

@@ -12,7 +12,7 @@ use Illuminate\Http\RedirectResponse;
 
 // Requests
 use App\Http\Requests\Product\StoreProductRequest;
-
+use App\Models\InventoryLocation;
 // Models
 use App\Models\Product;
 
@@ -20,7 +20,7 @@ class ProductController extends Controller
 {
     public function index(Request $request): Response
     {
-        $products = Product::latest()->paginate(50);
+        $products = Product::latest()->with(['inventoryLocations'])->paginate(50);
 
         return Inertia::render('Products', [
             'products' => new ProductCollection($products),
@@ -38,6 +38,14 @@ class ProductController extends Controller
         $product->description   = $input['description'];
 
         $product->save();
+
+        $inventoryLocation = InventoryLocation::firstOrCreate([
+            'name' => $input['inventory_location_name'],
+        ]);
+
+        $inventoryLocation->products()->attach($product->id, [
+            'quantity' => $input['inventory_location_quantity'],
+        ]);
 
         return back()->with('alert', [
             'type' => 'success',

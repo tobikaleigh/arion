@@ -16,8 +16,10 @@ const props = defineProps({
 const emit = defineEmits(["success", "loading", "submitted"]);
 
 const form = useForm({
-    name: "",
-    description: "",
+    name: "Bærearm",
+    description: "Til montering av bærearm",
+    inventory_location_name: "A04-3",
+    inventory_location_quantity: 10,
 });
 
 function submit() {
@@ -79,6 +81,50 @@ watch(
                 class="mt-2"
                 :message="form.errors.description"
             />
+
+            <div class="grid grid-cols-2 gap-6">
+                <div>
+                    <InputLabel
+                        for="inventory_location_name"
+                        value="Inventory Location"
+                        class="mt-4"
+                    />
+                    <TextInput
+                        name="inventory_location_name"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="form.inventory_location_name"
+                        :error="form.errors.inventory_location_name"
+                        placeholder="Enter inventory location"
+                    />
+                    <InputError
+                        v-if="form.errors.inventory_location_name"
+                        class="mt-2"
+                        :message="form.errors.inventory_location_name"
+                    />
+                </div>
+
+                <div>
+                    <InputLabel
+                        for="inventory_location_quantity"
+                        value="Quantity"
+                        class="mt-4"
+                    />
+                    <TextInput
+                        name="inventory_location_quantity"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="form.inventory_location_quantity"
+                        :error="form.errors.inventory_location_quantity"
+                        placeholder="Enter location quantity"
+                    />
+                    <InputError
+                        v-if="form.errors.inventory_location_quantity"
+                        class="mt-2"
+                        :message="form.errors.inventory_location_quantity"
+                    />
+                </div>
+            </div>
         </div>
     </form>
 </template>

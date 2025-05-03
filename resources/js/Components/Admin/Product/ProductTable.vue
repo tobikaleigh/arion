@@ -27,7 +27,7 @@ function handleShowDeleteProductDialog(product) {
                     scope="col"
                     class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-0"
                 >
-                    id
+                    ID
                 </th>
                 <th
                     scope="col"
@@ -40,6 +40,12 @@ function handleShowDeleteProductDialog(product) {
                     class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                 >
                     Description
+                </th>
+                <th
+                    scope="col"
+                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                >
+                    Locations
                 </th>
                 <th scope="col" class="relative py-3.5 pr-4 pl-3 sm:pr-0">
                     <span class="sr-only">Edit</span>
@@ -69,6 +75,21 @@ function handleShowDeleteProductDialog(product) {
                         class="px-3 py-4 text-sm whitespace-nowrap text-gray-500"
                     >
                         {{ product.description }}
+                    </td>
+                    <td
+                        class="px-3 py-4 text-sm whitespace-nowrap text-gray-500"
+                    >
+                        <span
+                            class="bg-gray-50 border p-1"
+                            v-for="inventoryLocation in product
+                                .inventory_locations.data"
+                            :key="inventoryLocation.id"
+                        >
+                            {{ inventoryLocation.name }}: ({{
+                                inventoryLocation.pivot.quantity
+                            }}
+                            pcs)
+                        </span>
                     </td>
                     <td
                         class="relative py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-0"

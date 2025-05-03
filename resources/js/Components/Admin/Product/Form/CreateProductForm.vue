@@ -16,10 +16,11 @@ const props = defineProps({
 const emit = defineEmits(["success", "loading", "submitted"]);
 
 const form = useForm({
-    name: "Bærearm",
-    description: "Til montering av bærearm",
-    inventory_location_name: "A04-3",
-    inventory_location_quantity: 10,
+    internal_id: "",
+    name: "",
+    description: "",
+    inventory_location_name: "",
+    inventory_location_quantity: 1,
 });
 
 function submit() {
@@ -50,7 +51,23 @@ watch(
 <template>
     <form @submit.prevent="submit()">
         <div>
-            <InputLabel for="name" value="Name" />
+            <InputLabel for="Internal ID" value="Internal ID" />
+            <TextInput
+                name="internal_id"
+                type="text"
+                class="mt-1 block w-full"
+                v-model="form.internal_id"
+                :error="form.errors.internal_id"
+                placeholder="Enter internal ID"
+                autofocus
+            />
+            <InputError
+                v-if="form.errors.internal_id"
+                class="mt-2"
+                :message="form.errors.internal_id"
+            />
+
+            <InputLabel for="name" value="Name" class="mt-4" />
             <TextInput
                 name="name"
                 type="text"

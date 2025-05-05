@@ -22,7 +22,7 @@ function close() {
 </script>
 
 <template>
-    <Modal :show="show" @close="close()" title="product.name">
+    <Modal :show="show" @close="close()">
         <h2 class="mb-0">
             {{ product.name }}
         </h2>

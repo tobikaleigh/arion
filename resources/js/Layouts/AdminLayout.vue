@@ -20,7 +20,7 @@ import {
     Cog6ToothIcon,
     DocumentDuplicateIcon,
     FolderIcon,
-    HomeIcon,
+    NewspaperIcon,
     UsersIcon,
     XMarkIcon,
 } from "@heroicons/vue/24/outline";
@@ -39,14 +39,8 @@ const navigation = [
     {
         name: "Products",
         route: "admin.products.index",
-        icon: HomeIcon,
-        current: true,
-    },
-    {
-        name: "Documents",
-        route: "admin.products.index",
         icon: DocumentDuplicateIcon,
-        current: false,
+        current: true,
     },
 ];
 const teams = [

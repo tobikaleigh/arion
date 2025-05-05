@@ -5,3 +5,8 @@
 [x-cloak] {
     display: none;
 }
+
+/* Custom styles */
+h2 {
+    @apply text-xl font-bold mb-4;
+}

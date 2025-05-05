@@ -17,7 +17,7 @@ const props = defineProps({
     },
 });
 
-const emit = defineEmits(["success", "loading", "submitted"]);
+const emit = defineEmits(["loading", "success", "submitted"]);
 
 const form = useForm({
     internal_id: props.product.internal_id,
@@ -35,6 +35,7 @@ function submit() {
             emit("success");
         },
         onFinish: () => {
+            console.log("onFinish");
             emit("submitted");
         },
     });

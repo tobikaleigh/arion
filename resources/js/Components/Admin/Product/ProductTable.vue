@@ -1,7 +1,8 @@
 <script setup>
 import { ref } from "vue";
 import Button from "@/Components/Button.vue";
-import UpdateProductDialog from "./UpdateProductDialog.vue";
+import ShowProductDialogModal from "./ShowProductDialogModal.vue";
+import UpdateProductDialogModal from "./UpdateProductDialogModal.vue";
 import DeleteProductDialogModal from "./DeleteProductDialogModal.vue";
 
 const props = defineProps({
@@ -11,9 +12,22 @@ const props = defineProps({
     },
 });
 
+const showProductDialogModal = ref(false);
 const showUpdateProductDialogModal = ref(false);
 const showDeleteProductDialogModal = ref(false);
 const selectedProduct = ref(null);
+
+function handleShowProductDialogModal(product) {
+    if (
+        showUpdateProductDialogModal.value ||
+        showDeleteProductDialogModal.value
+    ) {
+        return;
+    }
+
+    selectedProduct.value = product;
+    showProductDialogModal.value = true;
+}
 
 function handleShowUpdateProductDialog(product) {
     selectedProduct.value = product;
@@ -44,7 +58,7 @@ function handleShowDeleteProductDialog(product) {
                 </th>
                 <th
                     scope="col"
-                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-52"
                 >
                     Description
                 </th>
@@ -67,7 +81,12 @@ function handleShowDeleteProductDialog(product) {
                 leave-active-class="transition-all duration-500"
                 leave-to-class="opacity-0 translate-x-4"
             >
-                <tr v-for="product in products" :key="product.id">
+                <tr
+                    v-for="product in products"
+                    :key="product.id"
+                    class="*:hover:bg-gray-50 cursor-pointer"
+                    @click="handleShowProductDialogModal(product)"
+                >
                     <td
                         class="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-0"
                     >
@@ -81,10 +100,12 @@ function handleShowDeleteProductDialog(product) {
                     <td
                         class="px-3 py-4 text-sm whitespace-nowrap text-gray-500"
                     >
-                        <span v-if="!product.description" class="italic"
-                            >No description.</span
-                        >
-                        {{ product.description }}
+                        <div class="w-52 overflow-hidden truncate">
+                            <span v-if="!product.description" class="italic"
+                                >No description.</span
+                            >
+                            {{ product.description }}
+                        </div>
                     </td>
                     <td
                         class="px-3 py-4 text-sm whitespace-nowrap text-gray-500"
@@ -104,30 +125,41 @@ function handleShowDeleteProductDialog(product) {
                     <td
                         class="relative py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-0"
                     >
-                        <Button
-                            size="sm"
-                            class="ml-2 text-indigo-600 hover:text-indigo-900 font-medium"
-                            type="button"
-                            variant="link"
-                            @click="handleShowUpdateProductDialog(product)"
-                        >
-                            Edit
-                        </Button>
-
-                        <Button
-                            size="sm"
-                            class="ml-2 text-indigo-600 hover:text-indigo-900 font-medium"
-                            type="button"
-                            variant="link"
-                            @click="handleShowDeleteProductDialog(product)"
-                        >
-                            Delete
-                        </Button>
+                        <div>
+                            <Button
+                                size="sm"
+                                class="ml-2 text-indigo-600 hover:text-indigo-900 font-medium"
+                                type="button"
+                                variant="link"
+                                @click="handleShowUpdateProductDialog(product)"
+                            >
+                                Edit
+                            </Button>
+                            <Button
+                                size="sm"
+                                class="ml-2 text-indigo-600 hover:text-indigo-900 font-medium"
+                                type="button"
+                                variant="link"
+                                @click="handleShowDeleteProductDialog(product)"
+                            >
+                                Delete
+                            </Button>
+                        </div>
                     </td>
                 </tr>
             </transition-group>
         </tbody>
     </table>
+
+    <!-- Show Product Dialog Modal -->
+    <ShowProductDialogModal
+        :show="showProductDialogModal"
+        :product="selectedProduct"
+        @close="
+            showProductDialogModal = false;
+            selectedProduct = null;
+        "
+    />
 
     <!-- Delete Product Dialog Modal -->
     <DeleteProductDialogModal
@@ -140,7 +172,7 @@ function handleShowDeleteProductDialog(product) {
     />
 
     <!-- Update Product Dialog Modal -->
-    <UpdateProductDialog
+    <UpdateProductDialogModal
         :show="showUpdateProductDialogModal"
         :product="selectedProduct"
         @close="

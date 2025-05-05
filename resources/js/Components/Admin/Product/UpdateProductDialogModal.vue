@@ -18,13 +18,16 @@ const props = defineProps({
 const submitForm = ref(false);
 const formIsLoading = ref(false);
 
-const emit = defineEmits(["success", "close"]);
+const emit = defineEmits(["close"]);
 
 function handleSubmit() {
     submitForm.value = true;
 }
 
 function close() {
+    formIsLoading.value = false;
+    submitForm.value = false;
+
     emit("close");
 }
 </script>
@@ -36,11 +39,8 @@ function close() {
             :product="product"
             :submit="submitForm"
             @loading="formIsLoading = true"
-            @submitted="
-                submitForm = false;
-                formIsLoading = false;
-            "
-            @success="emit('success')"
+            @submitted="console.log('submitted')"
+            @success="close()"
         />
 
         <template #footer>
